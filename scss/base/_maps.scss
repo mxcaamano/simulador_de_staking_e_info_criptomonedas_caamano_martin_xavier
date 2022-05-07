@@ -1,0 +1,66 @@
+@import 'listas.scss';
+
+// Mapas para parrafos y titulos
+
+$textos:(
+    color: nth($colores, 2)
+);
+
+$titulos:(
+    color: nth($colores, 1)
+);
+
+$fs45:(
+    color: nth($colores, 5)
+);
+
+.deer-theme{
+    h1, h2, h3, h4, h5{
+        color: map-get($titulos,color);
+        }
+    p{    color: map-get($textos,color);
+        }
+}
+
+body{
+    h1, h2, h3, h4, h5{
+        color: map-get($titulos,color);
+        }
+    p{    color: map-get($textos,color);
+        }
+}
+
+.deer-theme-dark{
+    h1, h2, h3, h4, h5{
+        color: map-get($titulos,color);
+        }
+    p{    color: map-get($textos,color);
+        }
+    .fs-5, .fs-4{
+        color: map-get($fs45,color);
+    }
+}
+
+.tabla-css {
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 600px;
+    box-shadow: 0 0 25px nth($colores,5);
+    border-collapse: collapse;
+}
+.tabla-css thead tr {
+    background-color: nth($colores,4);
+    color: nth($colores,5);
+    text-align: center;
+    cursor:pointer;
+}
+.tabla-css th,
+.tabla-css td {
+    padding: 20px 20px;
+    text-align: center; 
+    color: nth($colores,5);
+}
+.tabla-css tbody tr{
+    background-color: nth($colores,4);
+    color: nth($colores,5);  
+}

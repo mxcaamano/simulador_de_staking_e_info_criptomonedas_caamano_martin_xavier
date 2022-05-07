@@ -1,0 +1,58 @@
+@import 'listas.scss';
+
+%botones{
+    border: 2px solid nth($colores,2);
+    color: nth($colores,1);
+    margin: 0.5em;
+    font: inherit;
+    line-height: 1;    
+    transition: 0.25s;
+    text-decoration: none;
+    &:hover,
+    &:focus { 
+    border-color: nth($colores,5);
+    color: nth($colores,5);
+    box-shadow: 0 0.5em 0.5em -0.4em nth($colores,5);
+    transform: translateY(-0.25em);
+  }
+}
+
+.btn-form{
+    @extend %botones;
+    background: none;    
+    padding: 1em 2em;
+}
+
+.btn-dwd{
+    @extend %botones;
+    background: none;
+    // background-color: nth($colores,4);
+    padding: 1em 2.5em; 
+    display: inline-block;    
+}
+
+.btn-stk{
+    @extend %botones;
+    background-color: nth($colores,4);
+    padding: 1em 2.5em; 
+    display: inline-block;    
+}
+
+.btn-view{
+    @extend %botones;
+    padding: .25rem 2.5rem;
+    margin: 0.2em;
+    font-size: .95rem;
+}
+
+.btn-tema{
+    @extend %botones;
+    background-color: nth($colores,4);
+    padding: .25rem 0.5rem;
+    margin: 0.2em;
+    font-size: .95rem;
+    &:hover,
+    &:focus {
+    background-color: nth($colores,4);
+    }
+}

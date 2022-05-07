@@ -1,0 +1,188 @@
+// Imports
+@import 'components/header.scss';
+@import 'components/footer.scss';
+@import 'base/listas.scss';
+@import 'base/maps.scss';
+@import 'base/extends.scss';
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital@0;1&display=swap');
+
+// Estilos generales de Tema
+.deer-theme{
+    font-family: 'Titillium Web','Roboto','IBM Plex Sans', sans-serif;
+    color: nth($colores,1);
+    nav{
+        background-color: nth($colores, 4);
+        padding-top: 0.15rem;
+        padding-bottom: 0.15rem;
+        .navbar-brand{
+            color: nth($colores,1);
+    transition: 0.25s;
+    text-decoration: none;
+    &:hover,
+    &:focus {
+    color: nth($colores,5);
+    }
+    }
+        button{
+            color: nth($colores,1);
+            background-color: nth($colores, 4);
+            }
+            .active{
+                color: nth($colores,5)
+                }
+            a{
+            color: nth($colores,1);
+            }
+        }
+    .form-control{
+        border: 2px solid nth($colores,2);
+        border-radius: 0px;
+        transition: border-color 0.3s ease-in-out,box-shadow 0.3s ease-in-out;
+
+        &:focus{           
+            border-color: nth($colores,5);
+            box-shadow: inset 0 1px 1px nth($colores,1), 0 0 8px nth($colores,5);
+            outline: 0;
+    }
+        }
+    .card{
+        border-radius: 0;
+    }
+    
+    a{
+        color: nth($colores,1);
+    }
+    footer{
+        background-color: nth($colores, 4);
+        span{
+            color: nth($colores,3);
+        }
+    }
+}
+
+body{
+    font-family: 'Titillium Web','Roboto','IBM Plex Sans', sans-serif;
+    color: nth($colores,2);
+    background-color: nth($colores, 6);
+    height: 100%;
+    .navbar{
+        background-color: nth($colores, 6);
+        padding-top: 0.15rem;
+        padding-bottom: 0.15rem;
+        .navbar-brand{
+            color: nth($colores,2);
+    transition: 0.25s;
+    text-decoration: none;
+    &:hover,
+    &:focus {
+    color: nth($colores,5);
+    }
+    }
+        button{
+            color: nth($colores,1);
+            background-color: nth($colores, 4);
+            }
+            .active{
+                color: nth($colores,5)
+                }
+            a{
+            color: nth($colores,1);
+            }
+        }
+    .form-control{
+        border: 2px solid nth($colores,2);
+        border-radius: 0px;
+        transition: border-color 0.3s ease-in-out,box-shadow 0.3s ease-in-out;
+
+        &:focus{           
+            border-color: nth($colores,5);
+            box-shadow: inset 0 1px 1px nth($colores,1), 0 0 8px nth($colores,5);
+            outline: 0;
+    }
+        }
+    .card{
+        border-radius: 0;
+    }
+    
+    a{
+        color: nth($colores,1);
+    }
+    footer{
+        background-color: nth($colores, 1);
+        margin-top: 0.7rem;
+        padding-bottom: 2rem;
+        padding-top: 2rem;
+        span{
+            color: nth($colores,2);
+        }
+    }
+}
+
+.deer-theme-dark{
+    font-family: 'Titillium Web','Roboto','IBM Plex Sans', sans-serif;
+    color: nth($colores,2);
+    background-color: nth($colores, 4);
+    height: 100%;
+    nav{
+        background-color: nth($colores, 4);
+        padding-top: 0.15rem;
+        padding-bottom: 0.15rem;
+        .navbar-brand{
+            color: nth($colores,2);
+    transition: 0.25s;
+    text-decoration: none;
+    &:hover,
+    &:focus {
+    color: nth($colores,5);
+    }
+    }
+        button{
+            color: nth($colores,1);
+            background-color: nth($colores, 4);
+            }
+            .active{
+                color: nth($colores,5)
+                }
+            a{
+            color: nth($colores,1);
+            }
+        }
+    .form-control{
+        border: 2px solid nth($colores,2);
+        border-radius: 0px;
+        transition: border-color 0.3s ease-in-out,box-shadow 0.3s ease-in-out;
+
+        &:focus{           
+            border-color: nth($colores,5);
+            box-shadow: inset 0 1px 1px nth($colores,1), 0 0 8px nth($colores,5);
+            outline: 0;
+    }
+        }
+    .card{
+        border-radius: 0;
+    }
+    
+    a{
+        color: nth($colores,1);
+    }
+    footer{
+        background-color: nth($colores, 4);
+        padding-bottom: 2rem;
+        padding-top: 2rem;
+        span{
+            color: nth($colores,2);
+        }
+    }
+}
+
+
+.logo-crypto{
+        border-radius: 50%;
+        transition: 0.25s;
+        text-decoration: none;
+    &:hover,
+    &:focus { 
+    box-shadow: 0 0 2em 0em nth($colores,5);
+    transform: translateY(-0.5em);
+    }
+}

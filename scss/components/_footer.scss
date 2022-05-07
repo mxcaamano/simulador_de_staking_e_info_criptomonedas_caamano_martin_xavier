@@ -1,0 +1,17 @@
+@import '../base/listas';
+
+.borde-top{
+    -webkit-box-shadow:0 -15px 20px -6px nth($colores, 1);
+    -moz-box-shadow:0 -15px 20px -6px nth($colores, 1);
+    box-shadow:0 -15px 20px -6px nth($colores, 1);
+    // border-top: 1px solid nth($colores,1);
+}
+
+.deer-theme-dark{
+    .borde-top{
+        -webkit-box-shadow:0 -15px 20px -6px nth($colores, 5);
+        -moz-box-shadow:0 -15px 20px -6px nth($colores, 5);
+        box-shadow:0 -15px 20px -6px nth($colores, 5);
+        // border-top: 1px solid nth($colores,5);
+    }
+}
