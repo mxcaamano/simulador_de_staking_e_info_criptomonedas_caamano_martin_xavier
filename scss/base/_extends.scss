@@ -9,8 +9,7 @@
     transition: 0.25s;
     text-decoration: none;
     background-color: nth($colores,4);
-    &:hover,
-    &:focus { 
+    &:hover{ 
     border-color: nth($colores,5);
     color: nth($colores,5);
     box-shadow: 0 0.5em 0.5em -0.4em nth($colores,5);

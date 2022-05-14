@@ -175,6 +175,13 @@ body{
     }
 }
 
+.modal-header{
+    border-bottom: 1px solid nth($colores,5);
+}
+
+.modal-footer{
+    border-top: 1px solid nth($colores,5);
+}
 
 .logo-crypto{
         border-radius: 50%;

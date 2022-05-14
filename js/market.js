@@ -10,6 +10,7 @@ const mostrarData = (data)=>{
     const filtroUSDT = data.filter((el) => el.symbol.endsWith("USDT") && parseFloat(el.lastPrice) > 0)
     console.log(filtroUSDT);
     let tabla = ''
+    filtroUSDT.sort((el1, el2) => el1.volume*el1.lastPrice > el2.volume*el2.lastPrice ? -1 : el1.volume*el1.lastPrice < el2.volume*el2.lastPrice ? 1 : 0);
     filtroUSDT.forEach(el => {
         el.symbol = el.symbol.replace("USDT", "");
         el.priceChangePercent = parseFloat(el.priceChangePercent).toFixed(2);
@@ -19,8 +20,8 @@ const mostrarData = (data)=>{
         <td id="${el.symbol}tic">${el.symbol}</td>
         <td id="${el.symbol}price">${el.lastPrice}</td>
         <td id="${el.symbol}%"><span id="${el.symbol}+-"></span>${el.priceChangePercent}%</td>
-        <td>${el.volume.toFixed(2)}</td>
-        <td>${(el.volume*el.lastPrice).toFixed(2)}</td>
+        <td>${el.volume.toLocaleString("en-US")}</td>
+        <td>${(el.volume*el.lastPrice).toLocaleString("en-US")}</td>
         </tr>`
     })
     document.getElementById('data').innerHTML = tabla;
@@ -32,45 +33,3 @@ const mostrarData = (data)=>{
     })
 
 }
-
-// Funcion para ordenar tabla
-function sortTable(tableClass, n) {
-    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-    table = document.getElementsByClassName(tableClass)[0];
-    switching = true;
-    dir = "asc";
-    while (switching) {
-        switching = false;
-        rows = table.getElementsByTagName("TR");
-        for (i = 1; i < (rows.length - 1); i++) {
-            shouldSwitch = false;
-            x = rows[i].getElementsByTagName("TD")[n];
-            y = rows[i + 1].getElementsByTagName("TD")[n];
-                    var cmpX=isNaN(parseFloat(x.innerHTML))?x.innerHTML.toLowerCase():parseFloat(x.innerHTML);
-                    var cmpY=isNaN(parseFloat(y.innerHTML))?y.innerHTML.toLowerCase():parseFloat(y.innerHTML);
-                    cmpX=(cmpX=='-')?0:cmpX;
-                    cmpY=(cmpY=='-')?0:cmpY;
-            if (dir == "asc") {
-                if (cmpX > cmpY) {
-                    shouldSwitch= true;           
-                    break;
-                }
-            } else if (dir == "desc") {
-                if (cmpX < cmpY) {
-                    shouldSwitch= true;
-                    break;
-                }
-            }
-        }
-        if (shouldSwitch) {
-            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-            switching = true;
-            switchcount ++;      
-        } else {
-            if (switchcount == 0 && dir == "asc") {
-                dir = "desc";
-                switching = true;
-            }
-        }
-    }
-    }

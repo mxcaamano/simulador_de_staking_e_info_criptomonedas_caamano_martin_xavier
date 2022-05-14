@@ -107,7 +107,6 @@ body p {
   background-color: black;
   color: #2bf8bb;
   text-align: center;
-  cursor: pointer;
 }
 
 .tabla-css th,
@@ -132,7 +131,7 @@ body p {
   text-decoration: none;
   background-color: black;
 }
-.btn-tema:hover, .btn-view:hover, .btn-stk:hover, .btn-dwd:hover, .btn-form:hover, .btn-tema:focus, .btn-view:focus, .btn-stk:focus, .btn-dwd:focus, .btn-form:focus {
+.btn-tema:hover, .btn-view:hover, .btn-stk:hover, .btn-dwd:hover, .btn-form:hover {
   border-color: #2bf8bb;
   color: #2bf8bb;
   box-shadow: 0 0.5em 0.5em -0.4em #2bf8bb;
@@ -324,6 +323,14 @@ body footer span {
 }
 .deer-theme-dark footer span {
   color: #4eaa93;
+}
+
+.modal-header {
+  border-bottom: 1px solid #2bf8bb;
+}
+
+.modal-footer {
+  border-top: 1px solid #2bf8bb;
 }
 
 .logo-crypto {

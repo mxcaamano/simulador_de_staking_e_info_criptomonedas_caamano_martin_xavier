@@ -51,7 +51,7 @@ class cripto  {
                 resultado.innerHTML=`<li class="list-unstyled fs-5 mt-3">Plazo: ${plazo} Días</li>
                                       <li class="list-unstyled fs-5 mt-2">Inversion: ${imp} ${this.ticker}</li>
                                       <li id="recompensa${this.ticker}" class="list-unstyled fs-5 mt-2">Recompensa: ${recompensaTotal.toFixed(10)} ${this.ticker}</li>
-                                      <button type="button" class="btn-view my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                      <button type="button" class="btn-view my-3" data-bs-toggle="modal" data-bs-target="#ModalStake">
                                       Ver Rendimiento diario
                                       </button>
                                       </div>`;
@@ -133,11 +133,11 @@ ws.onmessage = function(evento) {
 
   function mostrarCriptos()
   {
-      const divcrypt = document.createElement("div");
+      const divCripto = document.createElement("div");
   
       listacriptos.criptos.forEach((cripto)=>{
               
-      divcrypt.innerHTML+=`<div id="${cripto.ticker}" class="col-sm-2 text-center my-4">
+      divCripto.innerHTML+=`<div id="${cripto.ticker}" class="col-sm-2 text-center my-4">
               <h3 class="mb-2">${cripto.nombre}</h3>
               <img id="${cripto.ticker}img" class="my-3" src=${cripto.img} width="100" height="100" alt=${cripto.nombre}>
               <li class="list-unstyled">Tipo: ${cripto.tipocripto}</li>
@@ -147,7 +147,7 @@ ws.onmessage = function(evento) {
               <button id="${cripto.ticker}Stake" class="btn-stk" type="button" data-bs-toggle="collapse" data-bs-target="#datos${cripto.ticker}" aria-expanded="false" aria-controls="datos${cripto.ticker}">+</button>
               `
       });
-      contenedor.appendChild(divcrypt);
+      contenedor.appendChild(divCripto);
   
   }
   
@@ -155,9 +155,9 @@ ws.onmessage = function(evento) {
   {
       listacriptos.criptos.forEach((cripto)=>{
           
-          const divcalc = document.getElementById(`${cripto.ticker}`);
+          const divData = document.getElementById(`${cripto.ticker}`);
                  
-              divcalc.innerHTML+=`<div class="collapse" id="datos${cripto.ticker}">
+              divData.innerHTML+=`<div class="collapse" id="datos${cripto.ticker}">
               <div class="form-group my-4">
               <div class="col-sm-12">
               <input id="plazo${cripto.ticker}" name="name" type="number" placeholder="Plazo (Días)" class="form-control" min=1 max=365>
@@ -171,7 +171,7 @@ ws.onmessage = function(evento) {
               <button id="Simular${cripto.ticker}" class="btn-stk">Simular</button>
               <div id="res${cripto.ticker}"class="text-left"></div>
               </div>`
-          contenedor.appendChild(divcalc);
+          contenedor.appendChild(divData);
       })   
   }
   
@@ -192,14 +192,14 @@ ws.onmessage = function(evento) {
           dias.value = null;
           imp.value = null;
           })
-          const btncolaps = document.querySelector(`#${cripto.ticker}Stake`);
-          function borrarStake(btncolaps,imp,dias){
-              btncolaps.innerHTML = "+";
+          const btncollapse = document.querySelector(`#${cripto.ticker}Stake`);
+          function borrarStake(btncollapse,imp,dias){
+              btncollapse.innerHTML = "+";
               imp.value=null; dias.value=null;
               document.getElementById(`res${cripto.ticker}`).innerHTML = "";
           }
-          btncolaps.addEventListener("click", ()=>{
-              btncolaps.innerHTML == "-" ? borrarStake(btncolaps,imp,dias) : btncolaps.innerHTML = "-";
+          btncollapse.addEventListener("click", ()=>{
+              btncollapse.innerHTML == "-" ? borrarStake(btncollapse,imp,dias) : btncollapse.innerHTML = "-";
               setTimeout(function(){
               document.getElementById(`plazo${cripto.ticker}`).focus();          
               }, 300);
@@ -209,18 +209,18 @@ ws.onmessage = function(evento) {
   } 
 
 function borrarModal(){
-  document.getElementById('tablaStake').innerHTML="";
-  listacriptos.criptos.forEach((cripto)=>{
-    document.getElementById(`res${cripto.ticker}`).innerHTML="";
-    const btnapymax = document.getElementById(`${cripto.ticker}Stake`);
-    btnapymax.innerText="+";
-    const datosapymax = document.getElementById(`datos${cripto.ticker}`);
-    datosapymax.setAttribute("class","collapse show");
     setTimeout(function(){
-       btnapymax.setAttribute("class","btn-stk");
-       btnapymax.setAttribute("aria-expanded","false");
-       datosapymax.setAttribute("class","collapsing");
-  }, 100);
+    document.getElementById('tablaStake').innerHTML="";
+    }, 200);
+    listacriptos.criptos.forEach((cripto)=>{
+    document.getElementById(`res${cripto.ticker}`).innerHTML="";
+    const btncollapse = document.getElementById(`${cripto.ticker}Stake`);
+    btncollapse.innerText="+";
+    const datosCripto = document.getElementById(`datos${cripto.ticker}`);
+    datosCripto.setAttribute("class","collapse show");
+    btncollapse.setAttribute("class","btn-stk");
+    btncollapse.setAttribute("aria-expanded","false");
+    datosCripto.setAttribute("class","collapsing");
   })
 }
 //Funcion Toastify Apy Maximo
