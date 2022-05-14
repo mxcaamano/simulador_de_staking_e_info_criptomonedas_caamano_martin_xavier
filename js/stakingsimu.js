@@ -35,20 +35,27 @@ class cripto  {
             {
                 let imp=importe;
                 let recompensaTotal = 0;
+                document.getElementById('tablaStake').innerHTML="";
                 for(let i = 1; i<=plazo; i++)
                 {
                 let recompensa = importe*this.apy/365;
                 recompensaTotal += recompensa;
                 importe += recompensa;
-                // console.log(`Dia ${i}: Recompensa estimada: ${recompensa.toFixed(10)} ${this.ticker.toUpperCase()} - Importe acumulado: ${importe.toFixed(10)} ${this.ticker.toUpperCase()}`);            
+                document.getElementById('tablaStake').innerHTML+=`<tr>
+                <td>${i}</td>
+                <td>${recompensa.toFixed(5)} ${this.ticker.toUpperCase()}</td>
+                <td>${importe.toFixed(5)} ${this.ticker.toUpperCase()}</td>
+                </tr>`
                 }
-                // alert(`Recompensa total estimada en ${plazo} dias: ${recompensaTotal.toFixed(10)} ${this.ticker.toUpperCase()} - Para ver staking diario ver consola.`)                
                 const resultado = document.querySelector(`#res${this.ticker}`);
                 resultado.innerHTML=`<li class="list-unstyled fs-5 mt-3">Plazo: ${plazo} Días</li>
                                       <li class="list-unstyled fs-5 mt-2">Inversion: ${imp} ${this.ticker}</li>
                                       <li id="recompensa${this.ticker}" class="list-unstyled fs-5 mt-2">Recompensa: ${recompensaTotal.toFixed(10)} ${this.ticker}</li>
+                                      <button type="button" class="btn-view my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                      Rendimiento diario
+                                      </button>
                                       </div>`;
-                toastOK(`Stake Calculado! 👍 Presiona aquí para ver mas`,'3000',`#recompensa${this.ticker}`);
+                toastOK(`Stake Calculado! 👍 Presiona aquí para ver mas`,'3000',`#tablaStake`);
             }
             else
             {
@@ -68,11 +75,11 @@ const [b,alt,sta,tok] = tipocripto;
 const dirlogo = '../assets/images/logos/';
 const btc = new cripto("BTC","Bitcoin",0.035,dirlogo+"bitcoin.svg",b,"BTCUSDT");
 const eth = new cripto("ETH","Ethereum",0.04,dirlogo+"ethereum.svg",alt,"ETHUSDT");
+const usdt = new cripto("USDT","Tether",0.06,dirlogo+"usdtlogo.svg",sta,"BUSDUSDT");
 const dai = new cripto("DAI","DAI",0.13,dirlogo+"dailogo.svg",sta,"USDTDAI");
 const axs = new cripto("AXS","Axie Infinty",0.05,dirlogo+"axslogo.svg",tok,"AXSUSDT");
 const sand = new cripto("SAND","The Sandbox",0.045,dirlogo+"sandlogo.svg",tok,"SANDUSDT");
-const ust = new cripto("UST","Terra USD",0.1947,dirlogo+"ustlogo.png",sta,"USTUSDT");
-listacriptos.agregarcripto(btc,eth,dai,axs,sand,ust);
+listacriptos.agregarcripto(btc,eth,usdt,dai,axs,sand);
 console.log("Criptomonedas disponibles:",...listacriptos.criptos);
 const contenedor = document.getElementById("cripto");
 
@@ -94,8 +101,8 @@ setTimeout(function(){
 
 //Websocket Criptos Stake en vivo
 let streams = [
-    "btcusdt@ticker", "ethusdt@ticker", "usdtdai@ticker",
-    "axsusdt@ticker", "sandusdt@ticker", "ustusdt@ticker",
+    "btcusdt@ticker", "ethusdt@ticker", "busdusdt@ticker",
+    "usdtdai@ticker", "axsusdt@ticker", "sandusdt@ticker",
   ];
 
 let ws = new WebSocket("wss://stream.binance.com:9443/ws/" + streams.join('/'));
@@ -132,7 +139,7 @@ ws.onmessage = function(evento) {
               
       divcrypt.innerHTML+=`<div id="${cripto.ticker}" class="col-sm-2 text-center my-4">
               <h3 class="mb-2">${cripto.nombre}</h3>
-              <img id="${cripto.ticker}img" class="logo-crypto my-3" src=${cripto.img} width="100" height="100" alt=${cripto.nombre}>
+              <img id="${cripto.ticker}img" class="my-3" src=${cripto.img} width="100" height="100" alt=${cripto.nombre}>
               <li class="list-unstyled">Tipo: ${cripto.tipocripto}</li>
               <li id="stream_${cripto.streamTicker}" class="list-unstyled lead"> <img class="my-1" src="../assets/images/logos/spin.svg" width="25" height="25"> </li>
               <li id="stream_%${cripto.streamTicker}" class="list-unstyled lead"> <img src="../assets/images/logos/spin.svg" width="25" height="25"> </li>
@@ -149,7 +156,6 @@ ws.onmessage = function(evento) {
       listacriptos.criptos.forEach((cripto)=>{
           
           const divcalc = document.getElementById(`${cripto.ticker}`);
-                 
               divcalc.innerHTML+=`<div class="collapse" id="datos${cripto.ticker}">
               <div class="form-group my-4">
               <div class="col-sm-12">
@@ -164,6 +170,7 @@ ws.onmessage = function(evento) {
               <button id="Simular${cripto.ticker}" class="btn-stk">Simular</button>
               <div id="res${cripto.ticker}"class="text-left"></div>
               </div>`
+                  
           contenedor.appendChild(divcalc);
       })   
   }

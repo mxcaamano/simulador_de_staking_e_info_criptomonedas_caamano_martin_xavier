@@ -186,3 +186,23 @@ body{
     transform: translateY(-0.5em);
     }
 }
+
+.bordes-neon{
+    box-shadow: 0 0 25px nth($colores,5);
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+  }
+  
+::-webkit-scrollbar-track {
+    background: lightgray; 
+  }
+   
+::-webkit-scrollbar-thumb {
+    background: nth($colores,2); 
+  }
+  
+::-webkit-scrollbar-thumb:hover {
+    background: nth($colores,5); 
+  }

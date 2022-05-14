@@ -99,8 +99,7 @@ body p {
 .tabla-css {
   margin-left: auto;
   margin-right: auto;
-  min-width: 600px;
-  box-shadow: 0 0 25px #2bf8bb;
+  min-width: 200px;
   border-collapse: collapse;
 }
 
@@ -131,6 +130,7 @@ body p {
   line-height: 1;
   transition: 0.25s;
   text-decoration: none;
+  background-color: black;
 }
 .btn-tema:hover, .btn-view:hover, .btn-stk:hover, .btn-dwd:hover, .btn-form:hover, .btn-tema:focus, .btn-view:focus, .btn-stk:focus, .btn-dwd:focus, .btn-form:focus {
   border-color: #2bf8bb;
@@ -151,7 +151,6 @@ body p {
 }
 
 .btn-stk {
-  background-color: black;
   padding: 1em 2.5em;
   display: inline-block;
 }
@@ -163,13 +162,9 @@ body p {
 }
 
 .btn-tema {
-  background-color: black;
   padding: 0.25rem 0.5rem;
   margin: 0.2em;
   font-size: 0.95rem;
-}
-.btn-tema:hover, .btn-tema:focus {
-  background-color: black;
 }
 
 .deer-theme {
@@ -339,6 +334,26 @@ body footer span {
 .logo-crypto:hover, .logo-crypto:focus {
   box-shadow: 0 0 2em 0em #2bf8bb;
   transform: translateY(-0.5em);
+}
+
+.bordes-neon {
+  box-shadow: 0 0 25px #2bf8bb;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: lightgray;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4eaa93;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2bf8bb;
 }
 
 /*# sourceMappingURL=style.css.map */
