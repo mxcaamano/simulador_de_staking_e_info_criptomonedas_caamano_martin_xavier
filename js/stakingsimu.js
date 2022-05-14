@@ -52,10 +52,10 @@ class cripto  {
                                       <li class="list-unstyled fs-5 mt-2">Inversion: ${imp} ${this.ticker}</li>
                                       <li id="recompensa${this.ticker}" class="list-unstyled fs-5 mt-2">Recompensa: ${recompensaTotal.toFixed(10)} ${this.ticker}</li>
                                       <button type="button" class="btn-view my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                      Rendimiento diario
+                                      Ver Rendimiento diario
                                       </button>
                                       </div>`;
-                toastOK(`Stake Calculado! 👍 Presiona aquí para ver mas`,'3000',`#tablaStake`);
+                toastOK(`Stake Calculado! 👍 Presiona aquí para ver mas`,'3000',`#recompensa${this.ticker}`);
             }
             else
             {
@@ -156,6 +156,7 @@ ws.onmessage = function(evento) {
       listacriptos.criptos.forEach((cripto)=>{
           
           const divcalc = document.getElementById(`${cripto.ticker}`);
+                 
               divcalc.innerHTML+=`<div class="collapse" id="datos${cripto.ticker}">
               <div class="form-group my-4">
               <div class="col-sm-12">
@@ -170,7 +171,6 @@ ws.onmessage = function(evento) {
               <button id="Simular${cripto.ticker}" class="btn-stk">Simular</button>
               <div id="res${cripto.ticker}"class="text-left"></div>
               </div>`
-                  
           contenedor.appendChild(divcalc);
       })   
   }
@@ -206,8 +206,23 @@ ws.onmessage = function(evento) {
           })
           
       })
-  }
-  
+  } 
+
+function borrarModal(){
+  document.getElementById('tablaStake').innerHTML="";
+  listacriptos.criptos.forEach((cripto)=>{
+    document.getElementById(`res${cripto.ticker}`).innerHTML="";
+    const btnapymax = document.getElementById(`${cripto.ticker}Stake`);
+    btnapymax.innerText="+";
+    const datosapymax = document.getElementById(`datos${cripto.ticker}`);
+    datosapymax.setAttribute("class","collapse show");
+    setTimeout(function(){
+       btnapymax.setAttribute("class","btn-stk");
+       btnapymax.setAttribute("aria-expanded","false");
+       datosapymax.setAttribute("class","collapsing");
+  }, 100);
+  })
+}
 //Funcion Toastify Apy Maximo
 function MostrarApyMax(){
  const toastApyMax = Toastify({
