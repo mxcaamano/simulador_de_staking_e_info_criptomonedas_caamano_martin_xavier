@@ -48,7 +48,7 @@ class cripto  {
                                       Ver Rendimiento diario
                                       </button>
                                       </div>`;
-                toastOK(`Stake Calculado! 👍 Presiona aquí para ver mas`,'3000',`#recompensa${this.ticker}`);
+                toastOK(`Stake Calculado! 👍 `,'3000',`#recompensa${this.ticker}`);
             }
             else
             {
