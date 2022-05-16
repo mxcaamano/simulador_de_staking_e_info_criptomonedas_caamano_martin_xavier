@@ -10,11 +10,6 @@ class Listacriptos {
     {
         this.criptos.push(...cripto);
     }
-
-    licriptos()
-    {
-        console.log(this.criptos);
-    }
 }
 
 class cripto  {
@@ -28,20 +23,18 @@ class cripto  {
         this.streamTicker=streamTicker;
     }
     calculoStaking(plazo,importe)
-    {       
-            console.log(plazo);
-            console.log(importe);            
+    {              
             if(plazo>=1 && plazo<=365 && !isNaN(importe) && importe>0)
             {
                 let imp=importe;
                 let recompensaTotal = 0;
-                document.getElementById('tablaStake').innerHTML="";
+                document.getElementById(`tablaStake${this.ticker}`).innerHTML="";
                 for(let i = 1; i<=plazo; i++)
                 {
                 let recompensa = importe*this.apy/365;
                 recompensaTotal += recompensa;
                 importe += recompensa;
-                document.getElementById('tablaStake').innerHTML+=`<tr>
+                document.getElementById(`tablaStake${this.ticker}`).innerHTML+=`<tr>
                 <td>${i}</td>
                 <td>${recompensa.toFixed(5)} ${this.ticker.toUpperCase()}</td>
                 <td>${importe.toFixed(5)} ${this.ticker.toUpperCase()}</td>
@@ -51,7 +44,7 @@ class cripto  {
                 resultado.innerHTML=`<li class="list-unstyled fs-5 mt-3">Plazo: ${plazo} Días</li>
                                       <li class="list-unstyled fs-5 mt-2">Inversion: ${imp} ${this.ticker}</li>
                                       <li id="recompensa${this.ticker}" class="list-unstyled fs-5 mt-2">Recompensa: ${recompensaTotal.toFixed(10)} ${this.ticker}</li>
-                                      <button type="button" class="btn-view my-3" data-bs-toggle="modal" data-bs-target="#ModalStake">
+                                      <button type="button" class="btn-view my-3" data-bs-toggle="modal" data-bs-target="#ModalStake${this.ticker}">
                                       Ver Rendimiento diario
                                       </button>
                                       </div>`;
@@ -80,7 +73,6 @@ const dai = new cripto("DAI","DAI",0.13,dirlogo+"dailogo.svg",sta,"USDTDAI");
 const axs = new cripto("AXS","Axie Infinty",0.05,dirlogo+"axslogo.svg",tok,"AXSUSDT");
 const sand = new cripto("SAND","The Sandbox",0.045,dirlogo+"sandlogo.svg",tok,"SANDUSDT");
 listacriptos.agregarcripto(btc,eth,usdt,dai,axs,sand);
-console.log("Criptomonedas disponibles:",...listacriptos.criptos);
 const contenedor = document.getElementById("cripto");
 
 //Calculo de Apy Maximo
@@ -88,8 +80,6 @@ let apymax = Math.max(...listacriptos.criptos.map((i) => i.apy));
 let criptoapymax = listacriptos.criptos.find(i => {
     return i.apy === apymax
   })
-console.log(apymax);
-console.log(criptoapymax);
 
 //Uso de Funciones del DOM
 mostrarCriptos();
@@ -118,7 +108,7 @@ ws.onmessage = function(evento) {
         mostrarStreams(msgs)
       }
     } catch (e) {
-      console.log('Unknown message: ' + evento.data, e);
+      console.log(evento.data, e);
     }
   }
 
@@ -170,7 +160,33 @@ ws.onmessage = function(evento) {
               </div>
               <button id="Simular${cripto.ticker}" class="btn-stk">Simular</button>
               <div id="res${cripto.ticker}"class="text-left"></div>
-              </div>`
+              </div>
+  <div class="modal fade" id="ModalStake${cripto.ticker}" data-bs-backdrop="static" tabindex="-1" aria-labelledby="ModalStakeLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content bg-black rounded-0 bordes-neon">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalStakeLabel">Rendimiento Diario estimado en ${cripto.nombre} (${cripto.ticker})</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="tabla-css">
+            <thead>
+                <tr>
+                    <th><span class="mx-1"></span>Dia</th>
+                    <th><span class="mx-1"></span>Recompensa Estimada</th>
+                    <th><span class="mx-1"></span>Recompensa Acumulada</th>
+                </tr>
+            </thead>
+            <tbody id="tablaStake${cripto.ticker}">
+            </tbody>
+        </table>
+        </div>
+        <div class="modal-footer">
+          <button id="btnModal" type="button" class="btn-view" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+</div>`
           contenedor.appendChild(divData);
       })   
   }
@@ -203,26 +219,10 @@ ws.onmessage = function(evento) {
               setTimeout(function(){
               document.getElementById(`plazo${cripto.ticker}`).focus();          
               }, 300);
-          })
-          
+          })      
       })
   } 
 
-function borrarModal(){
-    setTimeout(function(){
-    document.getElementById('tablaStake').innerHTML="";
-    }, 200);
-    listacriptos.criptos.forEach((cripto)=>{
-    document.getElementById(`res${cripto.ticker}`).innerHTML="";
-    const btncollapse = document.getElementById(`${cripto.ticker}Stake`);
-    btncollapse.innerText="+";
-    const datosCripto = document.getElementById(`datos${cripto.ticker}`);
-    datosCripto.setAttribute("class","collapse show");
-    btncollapse.setAttribute("class","btn-stk");
-    btncollapse.setAttribute("aria-expanded","false");
-    datosCripto.setAttribute("class","collapsing");
-  })
-}
 //Funcion Toastify Apy Maximo
 function MostrarApyMax(){
  const toastApyMax = Toastify({

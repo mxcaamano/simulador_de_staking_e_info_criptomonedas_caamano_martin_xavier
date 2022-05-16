@@ -6,9 +6,7 @@ fetch(url)
     .catch( e => console.log(e))
 
 const mostrarData = (data)=>{
-    console.log(data)
     const filtroUSDT = data.filter((el) => el.symbol.endsWith("USDT") && parseFloat(el.lastPrice) > 0)
-    console.log(filtroUSDT);
     let tabla = ''
     filtroUSDT.sort((el1, el2) => el1.volume*el1.lastPrice > el2.volume*el2.lastPrice ? -1 : el1.volume*el1.lastPrice < el2.volume*el2.lastPrice ? 1 : 0);
     filtroUSDT.forEach(el => {

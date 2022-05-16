@@ -18,14 +18,12 @@
 }
 
 .btn-form{
-    @extend %botones;
-    background: none;    
+    @extend %botones; 
     padding: 1em 2em;
 }
 
 .btn-dwd{
     @extend %botones;
-    background: none;
     padding: 1em 2.5em; 
     display: inline-block;    
 }

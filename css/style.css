@@ -139,12 +139,10 @@ body p {
 }
 
 .btn-form {
-  background: none;
   padding: 1em 2em;
 }
 
 .btn-dwd {
-  background: none;
   padding: 1em 2.5em;
   display: inline-block;
 }
